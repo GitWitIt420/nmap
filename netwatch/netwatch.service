@@ -1,0 +1,19 @@
+# systemd unit for the netwatch listener.
+#   sudo cp netwatch.py /usr/local/bin/netwatch.py
+#   sudo mkdir -p /root/.netwatch && sudo cp config.example.json /root/.netwatch/config.json
+#   sudo cp netwatch.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now netwatch
+#   journalctl -u netwatch -f
+[Unit]
+Description=netwatch - nmap network watcher with text alerts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/netwatch.py watch
+Restart=always
+RestartSec=30
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
