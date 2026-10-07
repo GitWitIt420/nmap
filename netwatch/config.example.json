@@ -1,0 +1,44 @@
+{
+  "targets": "192.168.1.0/24",
+  "nmap_args": [
+    "-sn",
+    "-T4",
+    "-PR"
+  ],
+  "interval_minutes": 5,
+  "regular_min_days_30": 15,
+  "rare_max_days_90": 5,
+  "alert_cooldown_hours": 12,
+  "keep_days": 120,
+  "trusted": {
+    "a0:aa:aa:00:00:01": "Router",
+    "a0:aa:aa:00:00:02": "King's phone"
+  },
+  "notify": {
+    "methods": [
+      "email_sms",
+      "stdout"
+    ],
+    "twilio": {
+      "account_sid": "ACxxxxxxxx",
+      "auth_token": "xxxxxxxx",
+      "from": "+15550001111",
+      "to": "+15551234567"
+    },
+    "email_sms": {
+      "smtp_host": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "you@gmail.com",
+      "password": "gmail-app-password",
+      "from": "you@gmail.com",
+      "to": "5551234567@vtext.com"
+    },
+    "termux": {
+      "to": "+15551234567"
+    },
+    "ntfy": {
+      "server": "https://ntfy.sh",
+      "topic": "pick-a-long-random-topic-name"
+    }
+  }
+}
